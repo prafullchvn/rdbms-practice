@@ -1,0 +1,45 @@
+CREATE TABLE customer (cid INT, cname TEXT NOT NULL, mobile INT NOT NULL, city TEXT NOT NULL, PRIMARY KEY (cid))
+
+INSERT INTO customer VALUES   
+  (1001, 'B. Raju', 8976894567, 'Chennai'),
+  (2546, 'M. Sunil', 8876921234, 'Salem');
+
+
+INSERT INTO customer VALUES   
+  (1456, 'C. Kunal', 9444324578, 'Chennai'),
+  (1324, 'K. Kamal', 9443478902, 'Madurai'),
+  (4578, 'K. Chitra', 9897452123, 'Chennai'),
+  (3456, 'S. Bala', 9789012134, 'Karaikudi'),
+  (4896, 'K. Kamal', 9443478902, 'Madurai') ;
+
+CREATE TABLE hotel (
+  hid INT AUTO NOT NULL,
+  hname TEXT NOT NULL,
+  rate VARCHAR NOT NULL,
+  PRIMARY KEY ( hid )
+)
+
+INSERT INTO hotel VALUES 
+  (101, 'The conclave', 5000),
+  (124, 'Heritage Inn', 6750),
+  (456, 'The holidays', 4300);
+
+
+CREATE TABLE reserves (
+  cid INT NOT NULL,
+  hid INT NOT NULL,
+  day DATE NOT NULL
+);
+
+
+INSERT INTO reserves VALUES 
+  (1001, 101, '8.9.2019'),
+  (1456, 456, '17.8.2019'),
+  (4578, 124, '4.9.2019'),
+  (1324, 101, '6.8.2019'),
+  (1001, 101, '7.10.2019'),
+  (1456, 124, '28.8.2019');
+
+
+
+INSERT INTO customer VALUES   (1324, 'K. Kamal', 9443478901, 'Madurai');
