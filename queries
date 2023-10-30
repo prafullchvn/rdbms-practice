@@ -42,4 +42,42 @@ INSERT INTO reserves VALUES
 
 
 
-INSERT INTO customer VALUES   (1324, 'K. Kamal', 9443478901, 'Madurai');
+INSERT INTO customer VALUES   (1111, 'K. Kamal', 9443478901, 'Madurai');
+
+# All the customer from chennai
+SELECT c.cname, c.mobile FROM customer c WHERE c.city="Chennai";
+
+# customer who have reservation in hotel with id 101
+SELECT c.name FROM customer c, reserves r WHERE r.cid = c.cid AND r.hid = '101';
+
+#Find the mobile number of customers who have reserved hotel d H456.
+SELECT c.mobile FROM customer c, reserves r WHERE c.cid = r.cid AND r.hid = '456';
+
+# have reserved at least one hotel
+SELECT c.mobile FROM customer c, reserves r WHERE c.cid = r.cid;
+
+
+# name of customer who have reserved 
+SELECT c.cname FROM customer c, reserves r WHERE c.cid = r.cid AND (r.hid = '101' OR r.hid = '456');
+
+#Find the cid of all customers who have reserved ‘H101’ but not ‘H456’.
+
+#Using logical operator
+SELECT c.cid FROM customer c, reserves r WHERE c.cid = r.cid AND r.hid = '101' AND (NOT r.hid = 456);
+
+#Using set operator
+SELECT c.cid FROM customer c,reserves r WHERE c.cid = r.cid AND r.hid = '101'   EXCEPT  SELECT c1.cid FROM customer c1,reserves r1 WHERE c1.cid = r1.cid AND r1.hid = '456'  ;
+
+
+Nested queries 
+
+#Find the names of customers who have reserved ‘H101’.
+SELECT c.cid FROM customer c WHERE c.cid IN ( SELECT r.cid FROM reserves r WHERE r.hid = '101');
+
+#Find the names of customers who have reserved a hotel named ‘The Conclave’.
+
+SELECT c.cname FROM customer c WHERE c.cid IN ( SELECT r.cid FROM reserves r WHERE r.hid IN ( SELECT h.hid FROM hotel h WHERE h.hname = 'The conclave'))
+
+
+# hotesl having rates less than conclave
+SELECT h.hname, h.rate FROM hotel h WHERE h.rate < ANY SELECT h1.rate FROM hotel h1 WHERE h1.hname = 'Then conclave';
